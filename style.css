@@ -1,0 +1,403 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+html::-webkit-scrollbar {
+    width: 5px;
+}
+
+html::-webkit-scrollbar-track {
+    background-color: #ffc0cb;
+    border-radius: 8px;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: #ff758c;
+    border-radius: 8px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 50 50'%3E%3Cpath fill='%23ffffff' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 50 50'%3E%3Cpath fill='%23ffffff' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-position: 0 0, 40px 40px;
+    background-size: 80px 80px;
+    background-repeat: repeat;
+    background-color: #ffc0cb;
+    background-color: #ffc0cb;
+    width: 100%;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    flex-direction: column;
+}
+
+.tachinha {
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    background-color: #ff758c;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+header h1 {
+    position: absolute;
+    left: 50%;
+    top: 80px;
+    color: #ff758c;
+    transform: translateX(-50%);
+    font-family: 'inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 36px;
+    white-space: nowrap;
+}
+
+main {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+    z-index: 1;
+    padding: 150px 50px;
+}
+
+.balancar {
+    animation: balanco 2.5s ease-in-out alternate infinite;
+}
+
+@keyframes balanco {
+    0% {
+        transform: rotateZ(2deg);
+    }
+
+    100% {
+        transform: rotateZ(-2deg);
+    }
+}
+
+.moldura {
+    display: block;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform .7s cubic-bezier(0, -0.55, 0.27, 1.55);
+    will-change: transform;
+    box-shadow: 0 0 15px 1px rgb(0, 0, 0, .2);
+    border-radius: 1px;
+    background-color: #fff;
+    width: 260px;
+    height: 320px;
+    -webkit-font-smoothing: antialiased;
+    cursor: grab;
+}
+
+.moldura:active {
+    transform: scale(.9);
+    cursor: grabbing;
+}
+
+.moldura.virar:active {
+    transform: rotateY(180deg) scale(.9);
+    cursor: grabbing;
+}
+
+.moldura.virar {
+    transform: rotateY(180deg) scale(1.1);
+}
+
+.moldura.zoom {
+    transform: scale(1.8) !important;
+    z-index: 10;
+    transition: transform .5s cubic-bezier(0, -0.55, 0.27, 1.55);
+}
+
+.moldura.zoom-virado {
+    transform: rotateY(180deg) scale(1.8) !important;
+    z-index: 10;
+    transition: transform .4s cubic-bezier(0, -0.55, 0.27, 1.55);
+}
+
+.rot-1 {
+    transform: rotateZ(-4deg);
+}
+
+.rot-2 {
+    transform: rotateZ(3deg);
+}
+
+.rot-3 {
+    transform: rotateZ(-2deg);
+}
+
+.moldura img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+
+}
+
+.frente-moldura,
+.costa-moldura {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    backface-visibility: hidden;
+    background-color: #fff;
+    padding: 10px 10px 30px 10px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.costa-moldura {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    border: 1px solid #d4c59f;
+    background: #fff9e6;
+}
+
+.texto-maquina {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-family: 'Special Elite', serif;
+    text-align: center;
+}
+
+.frente-moldura figcaption {
+    margin: 20px;
+    pointer-events: none;
+    color: #121215;
+    font-size: 24px;
+    font-family: 'Dancing Script';
+    user-select: none;
+    -webkit-user-select: none;
+    text-align: center;
+}
+
+.emoji {
+    display: inline-block;
+    vertical-align: -0.2em;
+    margin: 0 .05em 0 .1em;
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.em {
+    font-size: 16px;
+}
+
+.love-emoji {
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media (max-width:1420px) {
+
+    main {
+        gap: 125px;
+    }
+
+    .moldura {
+        transform: scale(1);
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+    }
+
+    .moldura:active {
+        transform: scale(.9);
+    }
+
+    .moldura.zoom {
+        transform: scale(1.5) !important;
+        z-index: 10;
+    }
+
+    .moldura.virar {
+        transform: rotateY(180deg) scale(1.1);
+    }
+
+    .moldura.virar:active {
+        transform: rotateY(180deg) scale(.9);
+    }
+
+    .moldura.zoom-virado {
+        transform: rotateY(180deg) scale(1.5) !important;
+        z-index: 10;
+    }
+}
+
+@media (max-width:850px) {
+
+    main {
+        gap: 100px;
+        align-items: flex-start;
+    }
+
+    .moldura {
+        transform: scale(.9);
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+    }
+
+    .moldura:active {
+        transform: scale(.8);
+    }
+
+    .moldura.zoom {
+        transform: scale(1.3) !important;
+        z-index: 10;
+    }
+
+    .moldura.virar {
+        transform: rotateY(180deg) scale(1);
+    }
+
+    .moldura.virar:active {
+        transform: rotateY(180deg) scale(.8);
+    }
+
+    .moldura.zoom-virado {
+        transform: rotateY(180deg) scale(1.3) !important;
+        z-index: 10;
+    }
+}
+
+footer {
+    font-family: 'inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    opacity: 0.5;
+    margin-top: -70px;
+}
+
+p {
+    font-family: 'inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    opacity: 0.5;
+    margin-top: 10px;
+}
+
+@media (max-width:480px) {
+
+    main {
+        gap: 50px;
+    }
+
+    .moldura {
+        transform: scale(.9);
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+    }
+
+    .moldura:active {
+        transform: scale(.8);
+    }
+
+    .moldura.zoom {
+        transform: scale(1.3) !important;
+        z-index: 10;
+    }
+
+    .moldura.virar {
+        transform: rotateY(180deg) scale(1);
+    }
+
+    .moldura.virar:active {
+        transform: rotateY(180deg) scale(.8);
+    }
+
+    .moldura.zoom-virado {
+        transform: rotateY(180deg) scale(1.3) !important;
+        z-index: 10;
+    }
+}
+
+@media (max-width:380px) {
+
+    main {
+        gap: 30px;
+    }
+
+    .moldura {
+        transform: scale(.8);
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+    }
+
+    .moldura:active {
+        transform: scale(.7);
+    }
+
+    .moldura.zoom {
+        transform: scale(1.2) !important;
+        z-index: 10;
+    }
+
+    .moldura.virar {
+        transform: rotateY(180deg) scale(.9);
+    }
+
+    .moldura.virar:active {
+        transform: rotateY(180deg) scale(.7);
+    }
+
+    .moldura.zoom-virado {
+        transform: rotateY(180deg) scale(1.2) !important;
+        z-index: 10;
+    }
+}
+
+@media (max-width:321px) {
+
+    main {
+        gap: 10px;
+    }
+
+    .moldura {
+        transform: scale(.8);
+        touch-action: manipulation;
+        -webkit-touch-callout: none;
+    }
+
+    .moldura:active {
+        transform: scale(.7);
+    }
+
+    .moldura.zoom {
+        transform: scale(1.2) !important;
+        z-index: 10;
+    }
+
+    .moldura.virar {
+        transform: rotateY(180deg) scale(.9);
+    }
+
+    .moldura.virar:active {
+        transform: rotateY(180deg) scale(.7);
+    }
+
+    .moldura.zoom-virado {
+        transform: rotateY(180deg) scale(1.2) !important;
+        z-index: 10;
+    }
+}
